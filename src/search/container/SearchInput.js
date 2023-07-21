@@ -4,6 +4,8 @@ import { SearchOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../state";
 import Search from "./Search";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { actions as userActions } from "../../user/state";
 
 export default function SearchInput() {
     //error: state에서 search가 없었다.
@@ -23,8 +25,14 @@ export default function SearchInput() {
     }
 
     const autoCompletes = useSelector((state) => state.search.autoCompletes);
-    console.log(autoCompletes);
-    function goToUser(value) {}
+    const history = useHistory();
+    function goToUser(value) {
+        const user = autoCompletes.find((item) => item.name === value);
+        if (user) {
+            dispatch(userActions.setValue("user", user));
+            history.push(`/user/${user.name}`);
+        }
+    }
     return (
         <>
             <AutoComplete
