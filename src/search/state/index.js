@@ -6,6 +6,9 @@ export const Types = {
 };
 
 export const actions = {
+    // setValue: (key, value) => ({ type: Types.SetValue, key, value }),
+    // createSetValueAction 에서 함수를 반환하고 있어서
+
     setValue: createSetValueAction(Types.SetValue),
     fetchAutoComplete: (keyword) => ({
         type: Types.FetchAutoComplete,
