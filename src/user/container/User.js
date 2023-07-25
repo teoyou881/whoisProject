@@ -1,10 +1,11 @@
-import { PageHeader, Row, Col, Descriptions, Typography } from "antd";
+import { PageHeader, Row, Col, Descriptions, Typography, Space, Spin } from "antd";
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
-import { actions } from "../state";
+import { Types, actions } from "../state";
 import DescriptionsItem from "antd/lib/descriptions/Item";
+import useFetchInfo from "../../common/hook/useFetchInfo";
 
 /**  
 @param {object} param
@@ -23,12 +24,20 @@ export default function User({ match }) {
         dispatch(actions.fetchUser(name));
     }, [name]);
 
-    const isFetched = true;
+    // const isFetched = true;
+    const { isFetched, isSlow } = useFetchInfo(Types.FetchUser);
 
     return (
         <Row justify="center">
             <Col xs={24} md={20} lg={14}>
-                <PageHeader onBack={history.goBack} title="user info">
+                <PageHeader
+                    onBack={history.goBack}
+                    title={
+                        <Space>
+                            UserInfo
+                            {isSlow && <Spin size="small" />}
+                        </Space>
+                    }>
                     {user && (
                         <Descriptions layout="vertical" bordered column={1}>
                             <DescriptionsItem label="name">

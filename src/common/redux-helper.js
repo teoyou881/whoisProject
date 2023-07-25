@@ -10,7 +10,7 @@ export function createReducer(initialState, handlerMap) {
             } else {
                 return produce(state, (draft) => {
                     const handler = handlerMap[action.type];
-                    handler(draft, action);
+                    handler(draft, action); //리듀서
                 });
             }
         } else {
