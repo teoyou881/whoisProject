@@ -6,6 +6,9 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { Types, actions } from "../state";
 import DescriptionsItem from "antd/lib/descriptions/Item";
 import useFetchInfo from "../../common/hook/useFetchInfo";
+import Department from "./Department";
+import TagLIst from "./TagLIst";
+import History from "../../common/component/History";
 
 /**  
 @param {object} param
@@ -18,7 +21,6 @@ export default function User({ match }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector((state) => state.user.user);
-    console.log(user);
 
     useEffect(() => {
         dispatch(actions.fetchUser(name));
@@ -44,10 +46,14 @@ export default function User({ match }) {
                                 <Typography>{user.name}</Typography>
                             </DescriptionsItem>
                             <DescriptionsItem label="department">
-                                {user.department}
+                                <Department />
                             </DescriptionsItem>
-                            <DescriptionsItem label="tag">{user.tag}</DescriptionsItem>
-                            <DescriptionsItem label="edit log">edit log</DescriptionsItem>
+                            <DescriptionsItem label="tag">
+                                <TagLIst />
+                            </DescriptionsItem>
+                            <DescriptionsItem label="edit log">
+                                <History />
+                            </DescriptionsItem>
                         </Descriptions>
                     )}
                     {!user && isFetched && (

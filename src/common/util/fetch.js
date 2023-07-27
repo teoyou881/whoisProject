@@ -143,7 +143,9 @@ function getIsGeneratorFunction(obj) {
  *
  * @param {string=} actionType
  */
+//정보 변경했을 때 캐시 삭제해주는 함수.
 export function deleteApiCache(actionType) {
+    console.log(actionType);
     let keys = apiCache.keys();
     if (actionType) {
         keys = keys.filter((key) => key.includes(actionType));
