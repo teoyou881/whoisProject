@@ -13,7 +13,7 @@ import History from "../../common/component/History";
 /**  
 @param {object} param
 @param {import('react-router').match} param.match
-*/
+*/ import FetchLable from "./../component/FetchLabel";
 
 //Route를 통해서 렌더링 되는 컴포넌트에는 항상 match라는 속성값이 입력된다.
 export default function User({ match }) {
@@ -35,20 +35,35 @@ export default function User({ match }) {
                 <PageHeader
                     onBack={history.goBack}
                     title={
-                        <Space>
+                        <FetchLable label="User Info" actionType={Types.FetchUser} />
+                        /*  <Space>
                             UserInfo
                             {isSlow && <Spin size="small" />}
-                        </Space>
+                        </Space> */
                     }>
                     {user && (
                         <Descriptions layout="vertical" bordered column={1}>
                             <DescriptionsItem label="name">
                                 <Typography>{user.name}</Typography>
                             </DescriptionsItem>
-                            <DescriptionsItem label="department">
+                            <DescriptionsItem
+                                label={
+                                    <FetchLable
+                                        label="Department"
+                                        actionType={Types.FetchUpdateUser}
+                                        fetchKey="department"
+                                    />
+                                }>
                                 <Department />
                             </DescriptionsItem>
-                            <DescriptionsItem label="tag">
+                            <DescriptionsItem
+                                label={
+                                    <FetchLable
+                                        label="Tag"
+                                        actionType={Types.FetchUpdateUser}
+                                        fetchKey="tag"
+                                    />
+                                }>
                                 <TagLIst />
                             </DescriptionsItem>
                             <DescriptionsItem label="edit log">
