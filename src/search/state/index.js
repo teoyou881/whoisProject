@@ -3,6 +3,7 @@ import { createReducer, createSetValueAction, setValueReducer } from "../../comm
 export const Types = {
     SetValue: "search/SetValue",
     FetchAutoComplete: "search/FetchAutoComplete",
+    FetchAllHistory: "search/FetchAllHistory",
 };
 
 export const actions = {
@@ -14,11 +15,14 @@ export const actions = {
         type: Types.FetchAutoComplete,
         keyword,
     }),
+    // 전체 사용자의 history를 가져오기때문에 param으로 아무것도 필요없다.
+    fetchAllHistory: () => ({ type: Types.FetchAllHistory }),
 };
 
 const INITIAL_STATE = {
     keyword: "",
     autoCompletes: [],
+    history: [],
 };
 
 const reducer = createReducer(INITIAL_STATE, {

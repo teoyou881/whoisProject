@@ -37,9 +37,21 @@ function* fetchUpdateUser({ user, key, value }) {
         //여기서 cache를 날려줘야 한다.
         //인자를 넣어주면 그에 맞는 type값의 cache만 지우고 안넣어주면 모든 cache를 다 지운다.
         deleteApiCache();
+        yield put(actions.addHistory(data.history));
     } else {
         //실패하면 예전 user를 넣어준다.
         yield put(actions.setValue("user", user));
+    }
+}
+
+function* fetchUserHistory({ name }) {
+    const { isSuccess, data } = yield call(callApi, {
+        url: "/history",
+        params: { name },
+    });
+
+    if (isSuccess && data) {
+        yield put(actions.setValue("userHistory", data));
     }
 }
 
@@ -54,6 +66,10 @@ export default function* () {
         takeLeading(
             Types.FetchUpdateUser,
             makeFetchSaga({ fetchSaga: fetchUpdateUser, canCache: false })
+        ),
+        takeLeading(
+            Types.FetchUserHistory,
+            makeFetchSaga({ fetchSaga: fetchUserHistory, canCache: false })
         ),
     ]);
 }

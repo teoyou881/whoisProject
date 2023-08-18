@@ -3,7 +3,6 @@ import { AutoComplete, Input, Space, Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../state";
-import Search from "./Search";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { actions as userActions } from "../../user/state";
 

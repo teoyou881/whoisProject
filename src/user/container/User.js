@@ -21,10 +21,12 @@ export default function User({ match }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector((state) => state.user.user);
+    const userHistory = useSelector((state) => state.user.userHistory);
 
     useEffect(() => {
         dispatch(actions.fetchUser(name));
-    }, [name]);
+        dispatch(actions.fetchUserHistory(name));
+    }, [dispatch, name]);
 
     // const isFetched = true;
     const { isFetched, isSlow } = useFetchInfo(Types.FetchUser);
@@ -67,7 +69,7 @@ export default function User({ match }) {
                                 <TagLIst />
                             </DescriptionsItem>
                             <DescriptionsItem label="edit log">
-                                <History />
+                                <History items={userHistory} />
                             </DescriptionsItem>
                         </Descriptions>
                     )}
